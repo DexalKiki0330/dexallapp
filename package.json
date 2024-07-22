@@ -1,0 +1,15 @@
+{
+  "name": "my-netlify-project",
+  "version": "1.0.0",
+  "description": "Netlify Functions project for LINE Webhook",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "@line/bot-sdk": "^7.4.0"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
