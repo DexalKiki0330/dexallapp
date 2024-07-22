@@ -1,0 +1,8 @@
+authtoken: 2jSWviSrsQK2fWSNEaBwUTpj7Hf_6pbRpJmyyQ7TXWAqphgD1
+region: jp
+tunnels:
+  myapp:
+    proto: http
+    addr: 8080
+    host_header: localhost
+    subdomain: dexallapp
