@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "netlify dev",
-    "build": "echo 'Build script executed'"
+    "build": "react-scripts build"
   },
   "dependencies": {
-    "@line/bot-sdk": "^7.4.0"
+    "@line/bot-sdk": "^7.4.0",
+    "react-scripts": "^4.0.3"
   },
   "devDependencies": {},
   "author": "",
