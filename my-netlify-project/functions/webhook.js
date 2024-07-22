@@ -1,17 +1,17 @@
-const { Client, middleware } = require('@line/bot-sdk');
+const { Client } = require('@line/bot-sdk');
 
 const config = {
   channelAccessToken: process.env.LINE_CHANNEL_ACCESS_TOKEN,
-  channelSecret: process.env.LINE_CHANNEL_SECRET
+  channelSecret: process.env.LINE_CHANNEL_SECRET,
 };
 
 const client = new Client(config);
 
-exports.handler = async (event, context) => {
+exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return {
       statusCode: 405,
-      body: 'Method Not Allowed'
+      body: 'Method Not Allowed',
     };
   }
 
@@ -21,13 +21,13 @@ exports.handler = async (event, context) => {
     await Promise.all(body.events.map(handleEvent));
     return {
       statusCode: 200,
-      body: 'OK'
+      body: 'OK',
     };
   } catch (err) {
     console.error(err);
     return {
       statusCode: 500,
-      body: 'Internal Server Error'
+      body: 'Internal Server Error',
     };
   }
 };
@@ -37,6 +37,8 @@ async function handleEvent(event) {
     return Promise.resolve(null);
   }
 
-  const echo = { type: 'text', text: event.message.text };
-  return client.replyMessage(event.replyToken, echo);
+  return client.replyMessage(event.replyToken, {
+    type: 'text',
+    text: event.message.text,
+  });
 }
