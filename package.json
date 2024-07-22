@@ -4,7 +4,8 @@
   "description": "Netlify Functions project for LINE Webhook",
   "main": "index.js",
   "scripts": {
-    "start": "netlify dev"
+    "start": "netlify dev",
+    "build": "echo 'Build script executed'"
   },
   "dependencies": {
     "@line/bot-sdk": "^7.4.0"
