@@ -8,19 +8,35 @@ const config = {
 const client = new Client(config);
 
 exports.handler = async (event, context) => {
+  if (event.httpMethod !== 'POST') {
+    return {
+      statusCode: 405,
+      body: 'Method Not Allowed'
+    };
+  }
+
   const body = JSON.parse(event.body);
-  await Promise.all(body.events.map(handleEvent));
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ success: true })
-  };
+
+  try {
+    await Promise.all(body.events.map(handleEvent));
+    return {
+      statusCode: 200,
+      body: 'OK'
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      statusCode: 500,
+      body: 'Internal Server Error'
+    };
+  }
 };
 
 async function handleEvent(event) {
   if (event.type !== 'message' || event.message.type !== 'text') {
-    return null;  // Only handle text messages
+    return Promise.resolve(null);
   }
 
   const echo = { type: 'text', text: event.message.text };
   return client.replyMessage(event.replyToken, echo);
-};
+}
